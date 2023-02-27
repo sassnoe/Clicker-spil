@@ -3,10 +3,32 @@ body {
 }
 
 #screen {
-  aspect-ratio: 16/10;
+  aspect-ratio: 16/9;
+
+  cursor: url("images/crosshair_red.jpg") 40 40 auto;
 }
 
 #game_background {
+  background-image: url("images/Moon_City.jpg");
+  background-size: cover;
+  aspect-ratio: 16/9;
+  position: relative;
+}
+
+#life_board {
+  position: absolute;
+  margin-top: 50%;
+  margin-left: 10vw;
+}
+
+#life_board img {
   width: 100%;
-  background-image: url("Clicker-spil/Moon_City.jpg");
+}
+
+#milk1_container {
+  position: absolute;
+  width: 10%;
+  left: 20%;
+  top: 20%;
+  z-index: 1;
 }
