@@ -4,31 +4,32 @@ body {
 
 #screen {
   aspect-ratio: 16/9;
-
-  cursor: url("images/crosshair_red.jpg") 40 40 auto;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  cursor: url(images/crosshair_red.jpg), auto;
 }
 
 #game_background {
   background-image: url("images/Moon_City.jpg");
-  background-size: cover;
   aspect-ratio: 16/9;
+  background-size: cover;
   position: relative;
 }
 
 #life_board {
   position: absolute;
-  margin-top: 50%;
+  margin-top: 1vw;
   margin-left: 10vw;
 }
 
 #life_board img {
-  width: 100%;
+  width: 5%;
 }
 
 #milk1_container {
   position: absolute;
-  width: 10%;
+  width: 1vw;
   left: 20%;
   top: 20%;
-  z-index: 1;
 }
