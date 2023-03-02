@@ -1,13 +1,15 @@
 body {
   margin: 0;
+  overflow: hidden;
 }
 
 #screen {
-  aspect-ratio: 16/9;
+  /* aspect-ratio: 16/9; */
+  aspect-ratio: 16/10;
   width: 100%;
   position: relative;
   overflow: hidden;
-  cursor: url(images/crosshair_red.jpg), auto;
+  cursor: url(images/red_crosshair.png) 40 40, auto;
 }
 
 #game_background {
@@ -15,12 +17,14 @@ body {
   aspect-ratio: 16/9;
   background-size: cover;
   position: relative;
+  width: 100vw;
 }
 
 #life_board {
   position: absolute;
-  margin-top: 1vw;
-  margin-left: 10vw;
+
+  top: 5%;
+  left: 3%;
 }
 
 #life_board img {
@@ -29,7 +33,56 @@ body {
 
 #milk1_container {
   position: absolute;
-  width: 1vw;
+  width: 5%;
   left: 20%;
   top: 20%;
+}
+
+#milk1 {
+  width: 100%;
+}
+
+/* ============== animationer ============== */
+
+.falling {
+  animation-name: falling;
+  animation-duration: 4s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes falling {
+  0% {
+    transform: translate(0, -100%);
+  }
+
+  100% {
+    transform: translate(0, 56.25vw);
+  }
+}
+
+/* ============== positions & paused ============== */
+
+.paused {
+  animation-play-state: paused;
+}
+
+.position1 {
+  left: 10vw;
+}
+
+.position2 {
+  left: 40vw;
+}
+
+.position3 {
+  left: 70vw;
+}
+
+.position4 {
+  left: 30vw;
+}
+
+.position5 {
+  left: 55vw;
 }
