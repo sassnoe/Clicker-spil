@@ -3,61 +3,314 @@ body {
   overflow: hidden;
 }
 
+h2 {
+  font-size: 8vw;
+  margin: 0;
+  text-shadow: 3px 3px 2px white;
+}
+
+p {
+  font-size: 2vw;
+  margin: 1vw 0 2vw;
+  text-shadow: 1.5px 1.5px 2px white;
+  text-align: center;
+}
+
+button {
+  padding: 4vw 4vw;
+  font-size: 4vw;
+  margin: auto;
+  text-shadow: 1.5px 1.5px 2px white;
+
+  background-color: plum;
+  border: 5px solid pink;
+  border-radius: 7.5px;
+
+  cursor: url(images/red_crosshair.png) 40 40, auto;
+}
+
 #screen {
-  /* aspect-ratio: 16/9; */
-  aspect-ratio: 16/10;
-  width: 100%;
-  position: relative;
+  aspect-ratio: 16/9;
+  display: grid;
   overflow: hidden;
   cursor: url(images/red_crosshair.png) 40 40, auto;
 }
 
+#game {
+  grid-area: 1 / 1;
+  display: grid;
+  grid-template: 100%/100%;
+  width: 100%;
+}
+
 #game_background {
+  grid-area: 1 / 1;
+
   background-image: url("images/Moon_City.jpg");
-  aspect-ratio: 16/9;
   background-size: cover;
+}
+
+#game_elements {
+  grid-area: 1 / 1;
+  display: grid;
   position: relative;
-  width: 100vw;
+}
+
+#game_over {
+  grid-area: 1 / 1;
+  z-index: 999;
+
+  background-image: url("images/Moon_City.jpg");
+  background-size: cover;
+  filter: blur(3px);
+  filter: grayscale(75%);
+
+  position: relative;
+  transform: translate(-50%, -50%);
+
+  top: 50%;
+  left: 50%;
+}
+
+#level_complete {
+  grid-area: 1 / 1;
+  z-index: 999;
+  position: absolute;
+}
+
+#start {
+  grid-area: 1 / 1;
+  z-index: 999;
+}
+
+#start_background {
+  aspect-ratio: 16/9;
+  grid-area: 1 / 1;
+  z-index: 100;
+  width: 100%;
+  position: relative;
+  justify-content: center;
+  align-content: center;
+
+  background-image: url("images/Moon_City.jpg");
+  background-size: cover;
+  filter: blur(3px);
+}
+
+#start_screen {
+  position: absolute;
+  z-index: 110;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-size: 1vw;
+}
+
+#start_screen h2 {
+  position: absolute;
+  z-index: 110;
+
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -150%);
+  white-space: nowrap;
+}
+
+#start_button {
+  grid-area: 1 / 1;
+  position: absolute;
+  z-index: 110;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 95%);
 }
 
 #life_board {
   position: absolute;
 
-  top: 5%;
-  left: 3%;
+  top: 2vw;
+  left: 3vw;
 }
 
 #life_board img {
   width: 5%;
 }
 
-#milk1_container {
-  position: absolute;
-  width: 5%;
-  left: 20%;
-  top: 20%;
+.hidden,
+#game_over.hidden,
+#level_complete.hidden,
+#game.hidden,
+#start.hidden {
+  display: none;
 }
 
-#milk1 {
+/* ============== containers ============== */
+
+.milkContainer {
+  position: absolute;
+  width: 5%;
+}
+
+.milkWidth {
   width: 100%;
+}
+
+#milk1_container {
+  position: absolute;
+  top: 0;
+}
+
+#milk1_sprite {
+  width: 100%;
+}
+
+#milk2_container {
+  position: absolute;
+  top: 0;
+}
+
+#milk2_sprite {
+  width: 100%;
+}
+
+#milk3_container {
+  position: absolute;
+  top: 0;
+}
+
+#milk3_sprite {
+  width: 100%;
+}
+
+#milk4_container {
+  position: absolute;
+  top: 0;
+}
+
+#milk4_sprite {
+  width: 70%;
+}
+
+#milk5_container {
+  position: absolute;
+  top: 0;
+}
+
+#milk5_sprite {
+  width: 70%;
+}
+
+#rat1_container {
+  position: absolute;
+  width: 10%;
+
+  top: 0;
+}
+
+#rat1_sprite {
+  width: 70%;
+}
+
+#rat2_container {
+  position: absolute;
+  width: 15%;
+
+  top: 0;
+}
+
+#rat2_sprite {
+  width: 70%;
+}
+
+#splash1 {
+  position: absolute;
+  width: 5%;
+}
+
+.life_lost {
+  filter: grayscale(90%);
+}
+
+.life_available {
+  filter: drop-shadow(0 0 1px white);
 }
 
 /* ============== animationer ============== */
 
-.falling {
-  animation-name: falling;
+.falling0 {
+  animation-name: falling0;
+  animation-duration: 8s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes falling0 {
+  0% {
+    transform: translate(0, -15vw) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(0, 100vw) rotate(360deg);
+  }
+}
+
+.falling1 {
+  animation-name: falling1;
+  animation-duration: 8s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes falling1 {
+  0% {
+    transform: translate(0, -15vw) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(0, 100vw) rotate(720deg);
+  }
+}
+
+.falling2 {
+  animation-name: falling2;
+  animation-duration: 8s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes falling2 {
+  0% {
+    transform: translate(0, -15vw) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(0, 100vw) rotate(-720deg);
+  }
+}
+
+.rotate {
+  animation-name: rotate;
   animation-duration: 4s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
 
-@keyframes falling {
-  0% {
-    transform: translate(0, -100%);
-  }
+.disappear {
+  animation-name: disappear;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+}
 
+@keyframes disappear {
+  0% {
+    transform: scale(1);
+  }
   100% {
-    transform: translate(0, 56.25vw);
+    transform: scale(0);
   }
 }
 
