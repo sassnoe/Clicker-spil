@@ -128,16 +128,72 @@ button {
   transform: translate(-50%, 95%);
 }
 
+/* ============== UI ============== */
+
+#game_ui {
+  position: absolute;
+  top: 2vw;
+  right: 1vw;
+  font-size: 5vw;
+
+  color: white;
+
+  pointer-events: none;
+}
+
+/* ============== points, lives and timer ============== */
+
+#score_board {
+  display: grid;
+  grid-template-columns: 1vw 2vw;
+  justify-items: end;
+  align-items: center;
+}
+
+#point_count {
+  white-space: nowrap;
+  text-align: right;
+}
+
 #life_board {
   position: absolute;
+  display: grid;
+  grid-template-columns: 10vw 10vw 10vw;
+  margin-block-start: 1vw;
 
   top: 2vw;
-  left: 3vw;
+  right: 1vw;
 }
 
 #life_board img {
-  width: 5%;
+  width: 50%;
 }
+
+#time_board {
+  position: relative;
+}
+
+#time_container {
+  position: absolute;
+  width: 5vw;
+
+  aspect-ratio: 9/50;
+  border: 2px solid pink;
+  background-color: grey;
+  top: 1vw;
+  right: 0.2vw;
+}
+
+#time_sprite {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  background-color: yellowgreen;
+  transform-origin: center bottom;
+}
+
+/* ============== hidden ============== */
 
 .hidden,
 #game_over.hidden,
@@ -147,7 +203,7 @@ button {
   display: none;
 }
 
-/* ============== containers ============== */
+/* ============== milk & rat containers ============== */
 
 .milkContainer {
   position: absolute;
@@ -206,7 +262,6 @@ button {
 #rat1_container {
   position: absolute;
   width: 10%;
-
   top: 0;
 }
 
@@ -217,7 +272,6 @@ button {
 #rat2_container {
   position: absolute;
   width: 15%;
-
   top: 0;
 }
 
@@ -311,6 +365,28 @@ button {
   }
   100% {
     transform: scale(0);
+  }
+}
+
+.timer {
+  animation-name: timer;
+  animation-duration: 25s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes timer {
+  0% {
+    scale: 1 1;
+    background-color: lawngreen;
+  }
+  50% {
+    background-color: gold;
+  }
+  100% {
+    scale: 0 1;
+    background-color: crimson;
   }
 }
 

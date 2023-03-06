@@ -202,7 +202,7 @@ function displayPoints() {
 }
 
 function decrementLives() {
-  if (lives <= 0) {
+  if (lives <= 1) {
     gameOver();
   }
 
