@@ -73,18 +73,8 @@ button {
   left: 50%;
 }
 
+#start_background,
 #level_complete {
-  grid-area: 1 / 1;
-  z-index: 999;
-  position: absolute;
-}
-
-#start {
-  grid-area: 1 / 1;
-  z-index: 999;
-}
-
-#start_background {
   aspect-ratio: 16/9;
   grid-area: 1 / 1;
   z-index: 100;
@@ -95,7 +85,12 @@ button {
 
   background-image: url("images/Moon_City.jpg");
   background-size: cover;
-  filter: blur(3px);
+  /* filter: blur(3px); */
+}
+
+#start {
+  grid-area: 1 / 1;
+  z-index: 999;
 }
 
 #start_screen {
@@ -132,25 +127,21 @@ button {
 /* ============== UI ============== */
 
 #game_ui {
-  position: absolute;
   font-size: 5vw;
-  top: 5vw;
-  right: 2vw;
   color: white;
-
   pointer-events: none;
 }
 
 /* ============== points, lives and timer ============== */
 
 #score_board {
+  position: absolute;
   display: grid;
   grid-template-columns: 1vw 2vw;
-  justify-items: end;
   align-items: center;
 
   top: 2vw;
-  right: 1vw;
+  right: 2.5vw;
 }
 
 #point_count {
@@ -161,17 +152,15 @@ button {
 #life_board {
   position: absolute;
   display: grid;
+  top: 7.5vw;
+  left: 93.6vw;
+  width: 12vw;
 
-  grid-template-rows: 5vw 5vw 5vw;
-  margin-block-start: 1vw;
+  grid-template-rows: 6vw 6vw 6vw;
 }
 
 #life_board img {
-  width: 200%;
-}
-
-#time_board {
-  position: relative;
+  width: 40%;
 }
 
 #time_container {
@@ -181,8 +170,8 @@ button {
   aspect-ratio: 9/50;
   border: 2px solid pink;
   background-color: grey;
-  top: 10vw;
-  right: 0.2vw;
+  top: 25vw;
+  right: 1.35vw;
 }
 
 #time_sprite {
@@ -371,7 +360,7 @@ button {
 
 .timer {
   animation-name: timer;
-  animation-duration: 25s;
+  animation-duration: 15s;
   animation-timing-function: linear;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
@@ -386,7 +375,7 @@ button {
     background-color: gold;
   }
   100% {
-    scale: 0 1;
+    scale: 1 0;
     background-color: crimson;
   }
 }

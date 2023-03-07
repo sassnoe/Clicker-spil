@@ -7,6 +7,14 @@ let lives = 0;
 function ready() {
   console.log("JS ready");
   document.querySelector("#start_button").addEventListener("click", start);
+  document.querySelector("#btn_restart").addEventListener("click", startScreen);
+  document.querySelector("#btn_go_to_start").addEventListener("click", startScreen);
+}
+
+function startScreen() {
+  document.querySelector("#start").classList.remove("hidden");
+  document.querySelector("#level_complete").classList.add("hidden");
+  document.querySelector("#game_over").classList.add("hidden");
 }
 
 function start() {
@@ -21,13 +29,16 @@ function start() {
   startAnimations();
   // tilføjer positions
   addPositions();
-  //
+  // gør det muligt at klikke på containers
   clickItems();
+  // starter spillets timer
+  startTimer();
 }
 
 function startAnimations() {
   console.log("startAnimations");
 
+  // giver en random start animation på vores Milk / Rat containers
   document.querySelector("#milk1_container").classList.add("falling" + Math.floor(Math.random() * 3));
   document.querySelector("#milk2_container").classList.add("falling" + Math.floor(Math.random() * 3));
   document.querySelector("#milk3_container").classList.add("falling" + Math.floor(Math.random() * 3));
@@ -41,6 +52,7 @@ function startAnimations() {
 function addPositions() {
   console.log("addPositions");
 
+  // giver en random start position på vores Milk / Rat containers
   document.querySelector("#milk1_container").classList.add("position" + (Math.floor(Math.random() * 5) + 1));
   document.querySelector("#milk2_container").classList.add("position" + (Math.floor(Math.random() * 5) + 1));
   document.querySelector("#milk3_container").classList.add("position" + (Math.floor(Math.random() * 5) + 1));
@@ -195,6 +207,7 @@ function incrementPoints() {
   console.log("incrementPoints");
   points++;
   console.log(points + " point");
+  displayPoints();
 }
 
 function displayPoints() {
@@ -230,9 +243,28 @@ function levelComplete() {
 
   document.querySelector("#level_complete").classList.remove("hidden");
 
+  stopGame();
+
   // TO DO: AUDIO
 
-  stopGame();
+  // vis antal Milk supply skudt ned
+  document.querySelector("#milk_points").textContent = points;
+}
+
+function startTimer() {
+  document.querySelector("#time_sprite").classList.add("timer");
+
+  document.querySelector("#time_sprite").addEventListener("animationend", timeUp);
+}
+
+function timeUp() {
+  console.log("timeUp");
+
+  if (points >= 15) {
+    levelComplete();
+  } else {
+    gameOver();
+  }
 }
 
 function stopGame() {
