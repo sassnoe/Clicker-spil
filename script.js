@@ -54,6 +54,14 @@ function start() {
   resetLives();
   gameScreen();
 
+  // Starter baggrundsmusik
+  document.querySelector("#sound_gamestart").play();
+  document.querySelector("#sound_playing").play();
+  document.querySelector("#sound_playing").volume = 0.15;
+  // Fjerner Game Over baggrundsmusik (men lader den fortsætte i startskærmen)
+  document.querySelector("#sound_gameoverbackground").pause();
+  document.querySelector("#sound_gameoverbackground").currentTime = 0;
+
   // Starter alle animationer
   startAnimations();
   // Tilføjer positions
@@ -132,7 +140,10 @@ function clickMilk() {
   // Når animationen slutter: milkGone
   milk.addEventListener("animationend", milkGone);
 
-  // TO DO: lyd
+  // Genstarter klik mælk lyd
+  document.querySelector("#sound_milk").currentTime = 0;
+  // Afspiller klik mælk lyd
+  document.querySelector("#sound_milk").play();
 
   // Giv point
   incrementPoints();
@@ -192,7 +203,11 @@ function clickRat() {
   // når forsvind-animation er færdig: coinGone
   rat.addEventListener("animationend", ratGone);
 
-  // TO DO: lyd
+  // Genstarter klik rat lyd
+  document.querySelector("#sound_rat").currentTime = 0;
+  // Afspiller klik rat lyd
+  document.querySelector("#sound_rat").play();
+  document.querySelector("#sound_rat").volume = 0.5;
 
   // Fjern liv
   decrementLives();
@@ -269,7 +284,9 @@ function gameOver() {
 
   document.querySelector("#game_over").classList.remove("hidden");
 
-  // TO DO: AUDIO
+  // Afspiller game over lyd
+  document.querySelector("#sound_gameover").play();
+  document.querySelector("#sound_gameoverbackground").play();
 
   stopGame();
 }
@@ -281,10 +298,8 @@ function levelComplete() {
 
   stopGame();
 
-  // TO DO: AUDIO
-
-  // vis antal Milk supply skudt ned
-  document.querySelector("#milk_points").textContent = points;
+  // Afspiller level complete lyd
+  document.querySelector("#sound_win").play();
 }
 
 function startTimer() {
@@ -327,6 +342,10 @@ function stopGame() {
   document.querySelector("#rat2_container").removeEventListener("mousedown", clickMilk);
 
   // TO DO: FJERN LYDE
+  document.querySelector("#sound_gamestart").pause();
+  document.querySelector("#sound_playing").pause();
+  document.querySelector("#sound_gamestart").currentTime = 0;
+  document.querySelector("#sound_playing").currentTime = 0;
 
   // nultiller timeren ved at fjerne animationen
   document.querySelector("#time_sprite").classList.remove("timer");

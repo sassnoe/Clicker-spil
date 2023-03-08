@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Moon Cheese</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="images/Cheese.png" />
   </head>
   <body>
     <div id="screen">
@@ -77,8 +78,23 @@
         <button id="btn_go_to_start">RESTART</button>
       </div>
     </div>
+
     <!-- Audio elementer -->
-    <!-- <audio src=""></audio> -->
+
+    <!-- Game -->
+    <audio id="sound_gamestart" src="sounds/gamestart.mp3"></audio>
+    <audio id="sound_playing" src="sounds/retrowave.mp3"></audio>
+
+    <!-- Milk, Rat -->
+    <audio id="sound_milk" src="sounds/milk.mp3"></audio>
+    <audio id="sound_rat" src="sounds/rat.mp3"></audio>
+
+    <!-- Level Complete -->
+    <audio id="sound_win" src="sounds/levelcomplete.mp3"></audio>
+
+    <!-- Game Over -->
+    <audio id="sound_gameover" src="sounds/gameover.mp3"></audio>
+    <audio id="sound_gameoverbackground" src="sounds/gameoverbackground.mp3"></audio>
     <script src="script.js"></script>
   </body>
 </html>
