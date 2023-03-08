@@ -38,6 +38,8 @@ button {
   cursor: url(images/red_crosshair.png) 40 40, auto;
 }
 
+/* ============== Game ============== */
+
 #game {
   grid-area: 1 / 1;
   display: grid;
@@ -58,9 +60,12 @@ button {
   position: relative;
 }
 
+/* ============== Game Over ============== */
+
 #game_over {
   grid-area: 1 / 1;
   z-index: 999;
+  display: grid;
 
   background-image: url("images/Moon_City.jpg");
   background-size: cover;
@@ -91,25 +96,56 @@ button {
   grid-area: 1 / 1;
   position: absolute;
   z-index: 110;
+  display: grid;
+  width: 50%;
 
   top: 50%;
   left: 50%;
-  transform: translate(-50%, 0);
+  transform: translate(-150%, -60%);
 }
+
+/* ============== Level Complete ============== */
 
 #level_complete {
   aspect-ratio: 16/9;
   grid-area: 1 / 1;
   z-index: 100;
+  display: grid;
+
   width: 100%;
   position: relative;
   justify-content: center;
   align-content: center;
 
+  font-size: 3vw;
+
   background-image: url("images/Moon_City.jpg");
   background-size: cover;
-  /* filter: blur(3px); */
 }
+
+#level_complete h2 {
+  position: absolute;
+  z-index: 110;
+  color: lime;
+
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  white-space: nowrap;
+}
+
+#btn_go_to_start {
+  grid-area: 1 / 1;
+  position: absolute;
+  z-index: 110;
+  display: grid;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-150%, -75%);
+}
+
+/* ============== Start ============== */
 
 #start_background {
   aspect-ratio: 16/9;
@@ -396,7 +432,7 @@ button {
 
 .timer {
   animation-name: timer;
-  animation-duration: 15s;
+  animation-duration: 20s;
   animation-timing-function: linear;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
