@@ -1,8 +1,11 @@
 "use strict";
 window.addEventListener("load", ready);
 
+// Globale liv og point variabler
 let points = 0;
 let lives = 0;
+// gameRunning boolean
+let gameRunning = false;
 
 function ready() {
   console.log("JS ready");
@@ -17,28 +20,54 @@ function startScreen() {
   document.querySelector("#game_over").classList.add("hidden");
 }
 
+function gameScreen() {
+  document.querySelector("#start").classList.add("hidden");
+  document.querySelector("#level_complete").classList.add("hidden");
+  document.querySelector("#game_over").classList.add("hidden");
+}
+
+function resetPoints() {
+  // Nulstiller point i variablen
+  points = 0;
+  // Nulstiller visningen af point
+  displayPoints();
+}
+
+function resetLives() {
+  // Nulstiller til originalt antal liv
+  lives = 3;
+  // Fjerner mistede liv og viser aktive liv
+  document.querySelector("#life1").classList.remove("life_lost");
+  document.querySelector("#life2").classList.remove("life_lost");
+  document.querySelector("#life3").classList.remove("life_lost");
+  document.querySelector("#life1").classList.add("life_available");
+  document.querySelector("#life2").classList.add("life_available");
+  document.querySelector("#life3").classList.add("life_available");
+}
+
 function start() {
   console.log("start");
+  gameRunning = true;
 
-  points = 0;
-  lives = 3;
+  // Genstarter point, liv og tilføjer hidden til start, level_complete og game_over
+  resetPoints();
+  resetLives();
+  gameScreen();
 
-  document.querySelector("#start").classList.add("hidden");
-
-  // starter alle animationer
+  // Starter alle animationer
   startAnimations();
-  // tilføjer positions
+  // Tilføjer positions
   addPositions();
-  // gør det muligt at klikke på containers
+  // Gør det muligt at klikke på containers
   clickItems();
-  // starter spillets timer
+  // Starter spillets timer
   startTimer();
 }
 
 function startAnimations() {
   console.log("startAnimations");
 
-  // giver en random start animation på vores Milk / Rat containers
+  // Giver en random start animation på vores Milk / Rat containers
   document.querySelector("#milk1_container").classList.add("falling" + Math.floor(Math.random() * 3));
   document.querySelector("#milk2_container").classList.add("falling" + Math.floor(Math.random() * 3));
   document.querySelector("#milk3_container").classList.add("falling" + Math.floor(Math.random() * 3));
@@ -66,7 +95,7 @@ function addPositions() {
 function clickItems() {
   console.log("clickItems");
 
-  // registrer click på Milk containers
+  // Registrer click på Milk containers
   document.querySelector("#milk1_container").addEventListener("mousedown", clickMilk);
   document.querySelector("#milk2_container").addEventListener("mousedown", clickMilk);
   document.querySelector("#milk3_container").addEventListener("mousedown", clickMilk);
@@ -97,12 +126,15 @@ function clickMilk() {
   // Pauser milk container
   milk.classList.add("paused");
 
+  // Tilføjer orsvind animation på milk
   milk.querySelector("img").classList.add("disappear");
 
   // Når animationen slutter: milkGone
   milk.addEventListener("animationend", milkGone);
 
-  // TO DO: INCREMENT POINTS
+  // TO DO: lyd
+
+  // Giv point
   incrementPoints();
 }
 
@@ -110,30 +142,30 @@ function milkGone() {
   console.log("milkGone");
   let milk = this;
 
-  // Fjern EventListener der bringer os ind i denne funktion
+  // Fjerner EventListener der bringer os ind i denne funktion
   milk.removeEventListener("animationend", milkGone);
 
+  // Fjerner forsvind animation fra milk
   milk.querySelector("img").classList.remove("disappear");
-  //   milk.querySelector("img").classList.remove("rotate");
 
-  // Fjern pause fra milk container
+  // Fjerner pause fra milk container
   milk.classList.remove("paused");
 
-  // Genstarter falling animation på milk container
-  milkRestart.call(this);
-
-  // Gør det muligt at klikke
-  milk.addEventListener("mousedown", clickMilk);
+  // Hvis spillet kører:
+  if (gameRunning) {
+    // Genstarter falling animation på milk container
+    milkRestart.call(this);
+    // Gør det muligt at klikke på milk
+    milk.addEventListener("mousedown", clickMilk);
+  }
 }
 
 function milkRestart() {
   let milk = this;
   let falling = Math.floor(Math.random() * 3);
 
-  // Laver falling animationen mere flydende
-  milk.classList.remove("falling0");
-  milk.classList.remove("falling1");
-  milk.classList.remove("falling2");
+  // Genstarter falling animationen og gør den mere flydende med offsetWidth
+  milk.classList.remove("falling0", "falling1", "falling2");
   milk.offsetWidth;
   milk.classList.add("falling" + falling);
 
@@ -160,7 +192,9 @@ function clickRat() {
   // når forsvind-animation er færdig: coinGone
   rat.addEventListener("animationend", ratGone);
 
-  // TO DO: DECREMENT LIVES
+  // TO DO: lyd
+
+  // Fjern liv
   decrementLives();
 }
 
@@ -171,16 +205,18 @@ function ratGone() {
   // Fjern EventListener der bringer os ind i denne funktion
   rat.removeEventListener("animationend", ratGone);
 
+  // Fjerner forsvind animation fra rat
   rat.querySelector("img").classList.remove("disappear");
 
   // Fjern pause fra milk container
   rat.classList.remove("paused");
 
-  // Genstarter falling animation på milk container
-  ratRestart.call(this);
-
-  // Gør det muligt at klikke
-  rat.addEventListener("mousedown", clickRat);
+  if (gameRunning) {
+    // Genstarter falling animation på rat container
+    ratRestart.call(this);
+    // Gør det muligt at klikke på rat
+    rat.addEventListener("mousedown", clickRat);
+  }
 }
 
 function ratRestart() {
@@ -252,8 +288,9 @@ function levelComplete() {
 }
 
 function startTimer() {
+  // Starter timer animation
   document.querySelector("#time_sprite").classList.add("timer");
-
+  // Når animationen er færdig, kaldes funktionen timeUp
   document.querySelector("#time_sprite").addEventListener("animationend", timeUp);
 }
 
@@ -268,6 +305,8 @@ function timeUp() {
 }
 
 function stopGame() {
+  gameRunning = false;
+  // fjerner animationer fra milk og rat container
   document.querySelector("#milk1_container").classList.remove("falling0", "falling1", "falling2");
   document.querySelector("#milk2_container").classList.remove("falling0", "falling1", "falling2");
   document.querySelector("#milk3_container").classList.remove("falling0", "falling1", "falling2");
@@ -277,12 +316,18 @@ function stopGame() {
   document.querySelector("#rat1_container").classList.remove("falling0", "falling1", "falling2");
   document.querySelector("#rat2_container").classList.remove("falling0", "falling1", "falling2");
 
-  document.querySelector("#milk1_container").removeEventListener("click", clickMilk);
-  document.querySelector("#milk2_container").removeEventListener("click", clickMilk);
-  document.querySelector("#milk3_container").removeEventListener("click", clickMilk);
-  document.querySelector("#milk4_container").removeEventListener("click", clickMilk);
-  document.querySelector("#milk5_container").removeEventListener("click", clickMilk);
+  // fjerner eventlisteneren som gør det muligt at klikke på vores containers
+  document.querySelector("#milk1_container").removeEventListener("mousedown", clickMilk);
+  document.querySelector("#milk2_container").removeEventListener("mousedown", clickMilk);
+  document.querySelector("#milk3_container").removeEventListener("mousedown", clickMilk);
+  document.querySelector("#milk4_container").removeEventListener("mousedown", clickMilk);
+  document.querySelector("#milk5_container").removeEventListener("mousedown", clickMilk);
 
-  document.querySelector("#rat1_container").removeEventListener("click", clickMilk);
-  document.querySelector("#rat2_container").removeEventListener("click", clickMilk);
+  document.querySelector("#rat1_container").removeEventListener("mousedown", clickMilk);
+  document.querySelector("#rat2_container").removeEventListener("mousedown", clickMilk);
+
+  // TO DO: FJERN LYDE
+
+  // nultiller timeren ved at fjerne animationen
+  document.querySelector("#time_sprite").classList.remove("timer");
 }

@@ -1,6 +1,7 @@
 body {
   margin: 0;
   overflow: hidden;
+  user-select: none;
 }
 
 h2 {
@@ -63,8 +64,11 @@ button {
 
   background-image: url("images/Moon_City.jpg");
   background-size: cover;
-  filter: blur(3px);
+  filter: blur(2px);
   filter: grayscale(75%);
+
+  justify-content: center;
+  align-content: center;
 
   position: relative;
   transform: translate(-50%, -50%);
@@ -73,7 +77,26 @@ button {
   left: 50%;
 }
 
-#start_background,
+#game_over h2 {
+  position: absolute;
+  z-index: 110;
+
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  white-space: nowrap;
+}
+
+#btn_restart {
+  grid-area: 1 / 1;
+  position: absolute;
+  z-index: 110;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
 #level_complete {
   aspect-ratio: 16/9;
   grid-area: 1 / 1;
@@ -88,6 +111,19 @@ button {
   /* filter: blur(3px); */
 }
 
+#start_background {
+  aspect-ratio: 16/9;
+  grid-area: 1 / 1;
+  z-index: 100;
+  width: 100%;
+  position: relative;
+  justify-content: center;
+  align-content: center;
+
+  background-image: url("images/Moon_City.jpg");
+  background-size: cover;
+}
+
 #start {
   grid-area: 1 / 1;
   z-index: 999;
@@ -99,7 +135,7 @@ button {
 
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -60%);
 
   font-size: 1vw;
 }
@@ -206,7 +242,7 @@ button {
 
 #milk1_container {
   position: absolute;
-  top: 0;
+  top: -10%;
 }
 
 #milk1_sprite {
@@ -215,7 +251,7 @@ button {
 
 #milk2_container {
   position: absolute;
-  top: 0;
+  top: -25%;
 }
 
 #milk2_sprite {
@@ -224,7 +260,7 @@ button {
 
 #milk3_container {
   position: absolute;
-  top: 0;
+  top: -40%;
 }
 
 #milk3_sprite {
@@ -233,7 +269,7 @@ button {
 
 #milk4_container {
   position: absolute;
-  top: 0;
+  top: -55%;
 }
 
 #milk4_sprite {
@@ -242,7 +278,7 @@ button {
 
 #milk5_container {
   position: absolute;
-  top: 0;
+  top: -70%;
 }
 
 #milk5_sprite {
@@ -252,7 +288,7 @@ button {
 #rat1_container {
   position: absolute;
   width: 10%;
-  top: 0;
+  top: -5%;
 }
 
 #rat1_sprite {
@@ -262,7 +298,7 @@ button {
 #rat2_container {
   position: absolute;
   width: 15%;
-  top: 0;
+  top: -50%;
 }
 
 #rat2_sprite {
